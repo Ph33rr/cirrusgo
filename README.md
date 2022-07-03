@@ -8,3 +8,10 @@ A fast tool to scan SAAS,PAAS vulnerability written in Go
 / /___ / // /   / /   / /_/ /(__  )/ /_/ // /_/ /
 \____//_//_/   /_/    \__,_//____/ \____/ \____/ v0.0.1
 ```
+
+<img src="https://img.shields.io/badge/Open--Source--Summit-2022-blue.svg?logo=none" alt="" /></a>&nbsp;
+[![made-with-Go](https://img.shields.io/badge/made%20with-Go-brightgreen.svg)](http://golang.org)
+[![go-report](https://goreportcard.com/badge/github.com/ph33rr/cirrusgo)](https://goreportcard.com/report/github.com/ph33rr/cirrusgo)
+[![license](https://img.shields.io/badge/license-MIT-_red.svg)](https://opensource.org/licenses/MIT)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/ph33rr/cirrusgo/issues)
+[![godoc](https://img.shields.io/badge/godoc-reference-brightgreen.svg)](https://godoc.org/github.com/ph33rr/cirrusgo)
