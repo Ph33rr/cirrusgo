@@ -1,11 +1,14 @@
 package cirrusgo
 
 import (
-	"errors"
+	"bytes"
+	"io/ioutil"
+	"log"
 	"net/http"
+	"net/url"
 	"strings"
 
-	"github.com/Ph33rr/CirrusGo/pkg/request"
+	"github.com/ph33rr/CirrusGo/pkg/request"
 )
 
 
