@@ -99,3 +99,25 @@ func GetWritableObject(ResponseGET []byte, url string, foundEndPoint []string, o
 	return data
 }
 
+
+func GetSearchObjectGetSearchObject(ResponseGET []byte, url string, foundEndPoint []string, objectName string, pageSize int, page int, requestProxy string, requestHeaders []string) string {
+	var data string
+	payloadMassage := string(PayloadGeneratorSearchObj(objectName, pageSize, page))
+	fwuid, app, markup := GetAuraContext(ResponseGET)
+	payloadAuraContext := string(PayloadGeneratorAuraContext(fwuid, app, markup))
+	requestMethod := "POST"
+	requestParameter := map[string]string{"message": payloadMassage, "aura.context": payloadAuraContext, "aura.token": "null"}
+
+	responsebyte := RequestSalesforcePOST(url+foundEndPoint[0], requestMethod, requestProxy, requestHeaders, requestParameter)
+	jsonparser.ArrayEach(responsebyte, func(value []byte, dataType jsonparser.ValueType, offset int, err error) {
+		jsonvalu, _, _, err := jsonparser.Get(value, "returnValue")
+		if err != nil {
+			log.Fatalf("An Error Occured %v", err)
+			gologger.Fatal().Msg("Failed to get ObjectItems")
+		}
+		data = string(jsonvalu)
+
+	}, "actions")
+	return data
+}
+
