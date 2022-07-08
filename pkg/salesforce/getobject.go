@@ -121,3 +121,47 @@ func GetSearchObjectGetSearchObject(ResponseGET []byte, url string, foundEndPoin
 	return data
 }
 
+
+//this func get fwuid and markup from (func requestSalesforceGET)
+//then return AuraContext for Generator payload
+//<link data.*?>([\s\S]*?)<\/.*> backup regex
+func GetAuraContext(response []byte) (string, string, string) {
+
+	var fwuid, app, markup string
+	responesAuraContext := string(response)
+	regexJS := regexp.MustCompile(`<script.*?>([\s\S]*?)<\/script>`).FindAllString(responesAuraContext, -1)
+	var temparrayJS []string
+	for _, s := range regexJS {
+
+		tempJS, err := url.QueryUnescape(s)
+		if err != nil {
+			log.Fatalf("An Error Occured %v", err)
+			gologger.Fatal().Msg("Failed to get AuraContext")
+		}
+		temparrayJS = append(temparrayJS, tempJS)
+
+	}
+
+	for _, v := range temparrayJS {
+		fwuid := string(regexp.MustCompile(`"fwuid":"([^"]+)"`).FindString(v))
+		app := string(regexp.MustCompile(`"app":"([^"]+)"`).FindString(v))
+		markup := string(regexp.MustCompile(`"(APPLICATION@markup[^"]+)":"([^"]+)"`).FindString(v))
+
+		if fwuid != "" && app != "" && markup != "" {
+			gologger.Warning().Msg("Found UID: " + "[" + fwuid + "]")
+			gologger.Warning().Msg("Found APP Name: " + "[" + app + "]")
+			gologger.Warning().Msg("Found Markup: " + "[" + markup + "]")
+			return fwuid, app, markup
+
+		}
+	}
+
+	if fwuid == "" && app == "" && markup == "" {
+		gologger.Fatal().Msg("Failed to get AuraContext")
+		return "", "", ""
+	}
+
+	return fwuid, app, markup
+}
+
+
