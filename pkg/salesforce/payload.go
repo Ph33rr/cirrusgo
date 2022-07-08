@@ -5,6 +5,11 @@ import (
 	"fmt"
 )
 
+type Payload struct {
+	Massage json.RawMessage `json:"actions"`
+}
+
+
 func PayloadGeneratorGetItems(objectName string, page_size int, page int) []byte {
 
 	payload1 := `[{"id":"CirrusGo","descriptor":"serviceComponent://ui.force.components.controllers.lists.selectableListDataProvider.SelectableListDataProviderController/ACTION$getItems","callingDescriptor":"UNKNOWN","params":{"entityNameOrId":"`
