@@ -11,7 +11,7 @@ A fast tool to scan SAAS,PAAS vulnerability written in Go
 cirrusgo --help
 
 -u, --url <URL>           Define single URL to fuzz
--l, --list				  Show App List
+-l, --list		  Show App List
 -c, --check               only check endpoint
 -V, --version             Show current CRLFuzz version
 -h, --help                Display its help
@@ -37,29 +37,21 @@ cirrusgo salesforce --help
 
 [flags payload]
 [command: cirrusgo salesforce --payload options]
-
 -payload, --payload      Generator payload for test manual Default "ObjectList"
 
-GetItems                 -obj set object
-                          -page set page
-                          -pages set pageSize
-
-GetRecord 						         -re set recoder id 
-
-WritableOBJ              -obj set object  
-
-SearchObj                -obj set object 
-                          -page set page
-						                    -pages set pageSize
-
-AuraContext              -fwuid set UID 
-                          -App set AppName
-						                   -markup set markup
-                         
+GetItems                -obj set object
+                         -page set page
+                         -pages set pageSize
+GetRecord 	        -re set recoder id 
+WritableOBJ             -obj set object  
+SearchObj               -obj set object 
+                         -page set page
+                         -pages set pageSize
+AuraContext             -fwuid set UID 
+                         -App set AppName
+                         -markup set markup                        
 ObjectList               no options
-
-Dump                     no options
-						 
+Dump                     no options		 
 -h, --help               Display its help 
 
 ```
