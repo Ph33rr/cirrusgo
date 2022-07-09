@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-type Payload struct {
+type payload struct {
 	Massage json.RawMessage `json:"actions"`
 }
 
