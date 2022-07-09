@@ -13,13 +13,13 @@ cirrusgo --help
 -u, --url <URL>           Define single URL to fuzz
 -l, --list		  Show App List
 -c, --check               only check endpoint
--V, --version             Show current CRLFuzz version
+-V, --version             Show current version
 -h, --help                Display its help
 
 [cirrusgo [app] [options] ..]
 cirrusgo salesforce --help
 
--u, --url <URL>           Define single URL to fuzz
+-u, --url <URL>           Define single URL
 -c, --check               only check endpoint
 -lobj, --listobj          pull the object list.
 -obj --objects            set the object name. Default value is "User" object.
