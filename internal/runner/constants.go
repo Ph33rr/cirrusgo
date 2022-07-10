@@ -1,11 +1,11 @@
 package runner
 
 
-
+const (
 version = "0.0.1"
 author  = "infosec_90"
 
-const banner = `
+banner = `
    ______ _                           ______
   / ____/(_)_____ _____ __  __ _____ / ____/____
  / /    / // ___// ___// / / // ___// / __ / __ \
@@ -68,3 +68,4 @@ AuraContext           -fwuid set UID
 ObjectList             -no options
 Dump                   -no options 
 -h, --help              Display its help`
+)
