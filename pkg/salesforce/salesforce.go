@@ -9,7 +9,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/ph33rr/cirrusgo/pkg/request"
+	"github.com/Ph33rr/cirrusgo/pkg/request"
 	"github.com/projectdiscovery/gologger"
 )
 
