@@ -1,6 +1,22 @@
 # CirrusGo
 A fast tool to scan SAAS,PAAS vulnerability written in Go
 
+**Note flag -o output not working**
+
+# SAAS App Support :
+
+[#] salesforce
+
+[!] contentful next version
+
+
+install :
+
+```bash
+go install -v github.com/Ph33rr/CirrusGo/cmd/cirrusgo@latest
+```
+
+
  ```
    ______ _                           ______
   / ____/(_)_____ _____ __  __ _____ / ____/____
@@ -22,12 +38,15 @@ cirrusgo salesforce --help
 -u, --url <URL>           Define single URL
 -c, --check               only check endpoint
 -lobj, --listobj          pull the object list.
+-gobj --getobj            pull the object.
 -obj --objects            set the object name. Default value is "User" object.
                            Juicy Objects: Case,Account,User,Contact,Document,Cont
                            entDocument,ContentVersion,ContentBody,CaseComment,Not
                            e,Employee,Attachment,EmailMessage,CaseExternalDocumen
                            t,Attachment,Lead,Name,EmailTemplate,EmailMessageRelation
+-gre --getrecord          pull the Record id.
 -re --recordid            set the recode id to dump the record
+-cw --chkWritable         check all Writable objects
 -f, --full                dump all pages of objects.
 --dump
 -H, --header <HEADER>     Pass custom header to target
