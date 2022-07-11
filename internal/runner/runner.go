@@ -1,7 +1,6 @@
 package runner
 
 import (
-	"CirrusGo/pkg/salesforce"
 	"fmt"
 	"log"
 	"net/url"
@@ -9,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/logrusorgru/aurora"
+        "github.com/ph33rr/CirrusGo/pkg/salesforce"
 )
 
 func New(options *Options) {
