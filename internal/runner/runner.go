@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/logrusorgru/aurora"
-        "github.com/ph33rr/CirrusGo/pkg/salesforce"
+        "github.com/ph33rr/cirrusgo/pkg/salesforce"
 )
 
 func New(options *Options) {
