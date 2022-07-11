@@ -3,10 +3,10 @@ module github.com/Ph33rr/cirrusgo
 go 1.18
 
 require (
-	github.com/Ph33rr/cirrusgo v0.0.0-20220711131818-56f0cdecb268
+	github.com/Ph33rr/cirrusgo v0.0.1-beta
 	github.com/buger/jsonparser v1.1.1
 	github.com/logrusorgru/aurora v2.0.3+incompatible
-	github.com/ph33rr/cirrusgo v0.0.0-20220711133506-e3a794d4d3a8
+	github.com/ph33rr/cirrusgo v0.0.1-beta
 	github.com/projectdiscovery/gologger v1.1.4
 )
 
