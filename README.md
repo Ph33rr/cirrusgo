@@ -13,21 +13,7 @@ SAAS App Support :
 ```
 go install -v github.com/Ph33rr/CirrusGo/cmd/cirrusgo@latest
 ```
-**Example :**
 
-```
-cirrusgo salesforce -u https://loclhost -gobj
-```
-**dump:**
-
-```
-cirrusgo salesforce -u https://localhost/ -f
-```
-**check Writable Objects:**
-
-```
-cirusgo salesforce -u https://localhost/ -cw
-```
 
 **Example Help:**
 
@@ -92,6 +78,23 @@ Dump                     no options
 -h, --help               Display its help 
 
 ```
+
+**Example :**
+
+```
+cirrusgo salesforce -u https://loclhost -gobj
+```
+**dump:**
+
+```
+cirrusgo salesforce -u https://localhost/ -f
+```
+**check Writable Objects:**
+
+```
+cirusgo salesforce -u https://localhost/ -cw
+```
+
 
 <img src="https://img.shields.io/badge/Open--Source--Summit-2022-blue.svg?logo=none" alt="" /></a>&nbsp;
 [![made-with-Go](https://img.shields.io/badge/made%20with-Go-brightgreen.svg)](http://golang.org)
