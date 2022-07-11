@@ -1,33 +1,38 @@
-# CirrusGo
+## CirrusGo
 A fast tool to scan SAAS,PAAS vulnerability written in Go
+
+SAAS App Support :
+
+- salesforce
+- contentful (next version)
 
 **Note flag -o output not working**
 
-# SAAS App Support :
+**install :**
 
-[#] salesforce
-[#] contentful (next version)
-
-
-install :
-
-```bash
+```
 go install -v github.com/Ph33rr/CirrusGo/cmd/cirrusgo@latest
 ```
-
-#Usage:
+**Example :**
 
 ```
 cirrusgo salesforce -u https://loclhost -gobj
 ```
-dump: 
+**dump:**
+
 ```
 cirrusgo salesforce -u https://localhost/ -f
 ```
-check Writable Objects:
+**check Writable Objects:**
 
 ```
 cirusgo salesforce -u https://localhost/ -cw
+```
+
+**Example Help:**
+
+```
+cirrusgo --help
 ```
 
  ```
