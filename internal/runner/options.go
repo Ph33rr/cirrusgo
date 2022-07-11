@@ -9,7 +9,7 @@ import (
 	"os"
 	"strings"
 	
-	"github.com/ph33rr/cirrusgo/pkg/errors"
+	"github.com/Ph33rr/cirrusgo/pkg/errors"
 )
 
 type Options struct {
