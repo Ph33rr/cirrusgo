@@ -1,5 +1,5 @@
 builds:
-  - binary: crlfuzz
+  - binary: cirrusgo
     main: cmd/cirrusgo/main.go
     goos:
       - linux
