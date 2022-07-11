@@ -9,7 +9,7 @@ SAAS App Support :
 **Note flag -o output not working**
 
 **install :**
-
+golang 1.18Ver
 ```console
 go install -v github.com/Ph33rr/cirrusgo/cmd/cirrusgo@latest
 or
