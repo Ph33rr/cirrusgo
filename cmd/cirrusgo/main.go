@@ -1,6 +1,6 @@
 package main
 
-import "github.com/Ph33rr/CirrusGo/internal/runner"
+import "github.com/Ph33rr/cirrusgo/internal/runner"
 
 func main() {
 	options := runner.ParseOptions()
