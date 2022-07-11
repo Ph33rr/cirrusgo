@@ -1,5 +1,5 @@
-github.com/Ph33rr/CirrusGo v0.0.0-20220711131818-56f0cdecb268 h1:3d5omgE6bzuxsVR59TzJoOE+obJIx0oP7DsuSyf/sSc=
-github.com/Ph33rr/CirrusGo v0.0.0-20220711131818-56f0cdecb268/go.mod h1:H7eOz6OJh4fhTDb2z4DrqvcJoeTLoLokHSJC0rL/HBI=
+github.com/Ph33rr/cirrusgo v0.0.0-20220711131818-56f0cdecb268 h1:3d5omgE6bzuxsVR59TzJoOE+obJIx0oP7DsuSyf/sSc=
+github.com/Ph33rr/cirrusgo v0.0.0-20220711131818-56f0cdecb268/go.mod h1:H7eOz6OJh4fhTDb2z4DrqvcJoeTLoLokHSJC0rL/HBI=
 github.com/buger/jsonparser v1.1.1 h1:2PnMjfWD7wBILjqQbt530v576A/cAbQvEW9gGIpYMUs=
 github.com/buger/jsonparser v1.1.1/go.mod h1:6RYKKt7H4d4+iWqouImQ9R2FZql3VbhNgx27UK13J/0=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
@@ -21,8 +21,8 @@ github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd/go.mod h1:6dJ
 github.com/modern-go/reflect2 v0.0.0-20180701023420-4b7aa43c6742/go.mod h1:bx2lNnkwVCuqBIxFjflWJWanXIb3RllmbCylyMrvgv0=
 github.com/modern-go/reflect2 v1.0.1 h1:9f412s+6RmYXLWZSEzVVgPGK7C2PphHj5RJrvfx9AWI=
 github.com/modern-go/reflect2 v1.0.1/go.mod h1:bx2lNnkwVCuqBIxFjflWJWanXIb3RllmbCylyMrvgv0=
-github.com/ph33rr/CirrusGo v0.0.0-20220711133506-e3a794d4d3a8 h1:9z0DttGA0an9TgR15JCn723dfBQa4k/vcB169zEz0tk=
-github.com/ph33rr/CirrusGo v0.0.0-20220711133506-e3a794d4d3a8/go.mod h1:tTZzfF364pMaz7Cvg1DWt1i/Sg/9r4DzTua89d76KKY=
+github.com/ph33rr/cirrusgo v0.0.0-20220711133506-e3a794d4d3a8 h1:9z0DttGA0an9TgR15JCn723dfBQa4k/vcB169zEz0tk=
+github.com/ph33rr/cirrusgo v0.0.0-20220711133506-e3a794d4d3a8/go.mod h1:tTZzfF364pMaz7Cvg1DWt1i/Sg/9r4DzTua89d76KKY=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/projectdiscovery/gologger v1.1.4 h1:qWxGUq7ukHWT849uGPkagPKF3yBPYAsTtMKunQ8O2VI=
