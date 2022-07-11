@@ -1,36 +1,27 @@
-# CirrusGo
+## CirrusGo
 A fast tool to scan SAAS,PAAS vulnerability written in Go
+
+SAAS App Support :
+
+- salesforce
+- contentful (next version)
 
 **Note flag -o output not working**
 
-# SAAS App Support :
+**install :**
 
-[#] salesforce
-[#] contentful (next version)
-
-
-install :
-
-```bash
+```console
 go install -v github.com/Ph33rr/CirrusGo/cmd/cirrusgo@latest
 ```
 
-#Usage:
 
-```
-cirrusgo salesforce -u https://loclhost -gobj
-```
-dump: 
-```
-cirrusgo salesforce -u https://localhost/ -f
-```
-check Writable Objects:
+**Help:**
 
-```
-cirusgo salesforce -u https://localhost/ -cw
+```console
+cirrusgo --help
 ```
 
- ```
+ ```console
    ______ _                           ______
   / ____/(_)_____ _____ __  __ _____ / ____/____
  / /    / // ___// ___// / / // ___// / __ / __ \
@@ -87,6 +78,23 @@ Dump                     no options
 -h, --help               Display its help 
 
 ```
+
+**Example :**
+
+```console
+cirrusgo salesforce -u https://loclhost -gobj
+```
+**dump:**
+
+```console
+cirrusgo salesforce -u https://localhost/ -f
+```
+**check Writable Objects:**
+
+```console
+cirusgo salesforce -u https://localhost/ -cw
+```
+
 
 <img src="https://img.shields.io/badge/Open--Source--Summit-2022-blue.svg?logo=none" alt="" /></a>&nbsp;
 [![made-with-Go](https://img.shields.io/badge/made%20with-Go-brightgreen.svg)](http://golang.org)
