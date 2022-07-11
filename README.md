@@ -15,6 +15,20 @@ install :
 go install -v github.com/Ph33rr/CirrusGo/cmd/cirrusgo@latest
 ```
 
+#Usage:
+
+```
+cirrusgo salesforce -u https://loclhost -gobj
+```
+dump: 
+```
+cirrusgo salesforce -u https://localhost/ -f
+```
+check Writable Objects:
+
+```
+cirusgo salesforce -u https://localhost/ -cw
+```
 
  ```
    ______ _                           ______
