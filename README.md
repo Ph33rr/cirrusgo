@@ -15,7 +15,7 @@ go install -v github.com/Ph33rr/CirrusGo/cmd/cirrusgo@latest
 ```
 
 
-**Example Help:**
+**Help:**
 
 ```
 cirrusgo --help
