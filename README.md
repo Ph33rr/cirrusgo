@@ -17,11 +17,11 @@ go install -v github.com/Ph33rr/CirrusGo/cmd/cirrusgo@latest
 
 **Help:**
 
-```
+```console
 cirrusgo --help
 ```
 
- ```
+ ```console
    ______ _                           ______
   / ____/(_)_____ _____ __  __ _____ / ____/____
  / /    / // ___// ___// / / // ___// / __ / __ \
@@ -81,17 +81,17 @@ Dump                     no options
 
 **Example :**
 
-```
+```console
 cirrusgo salesforce -u https://loclhost -gobj
 ```
 **dump:**
 
-```
+```console
 cirrusgo salesforce -u https://localhost/ -f
 ```
 **check Writable Objects:**
 
-```
+```console
 cirusgo salesforce -u https://localhost/ -cw
 ```
 
