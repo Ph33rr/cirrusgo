@@ -11,7 +11,7 @@ SAAS App Support :
 **install :**
 
 ```console
-go install -v github.com/Ph33rr/CirrusGo/cmd/cirrusgo@latest
+go install -v github.com/Ph33rr/cirrusgo/cmd/cirrusgo@latest
 ```
 
 
