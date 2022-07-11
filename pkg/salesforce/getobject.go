@@ -2,14 +2,15 @@ package salesforce
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/url"
 	"regexp"
 
 	"github.com/buger/jsonparser"
+	"github.com/logrusorgru/aurora"
 	"github.com/projectdiscovery/gologger"
 )
-
 
 func GetObjectList(ResponseGET []byte, url string, foundEndPoint []string, requestProxy string, requestHeaders []string) []string {
 	var arrayObjList []string
@@ -35,9 +36,8 @@ func GetObjectList(ResponseGET []byte, url string, foundEndPoint []string, reque
 	return arrayObjList
 }
 
-
-func GetDump(ResponseGET []byte, url string, foundEndPoint []string, requestProxy string, requestHeaders []string) []string {
-	var arrayObjList []string
+func GetDump(ResponseGET []byte, url string, foundEndPoint []string, requestProxy string, requestHeaders []string) string {
+	//var arrayObjList []string
 
 	payloadMassage := string(PayloadGeneratorDump())
 	fwuid, app, markup := GetAuraContext(ResponseGET)
@@ -45,21 +45,9 @@ func GetDump(ResponseGET []byte, url string, foundEndPoint []string, requestProx
 	requestMethod := "POST"
 	requestParameter := map[string]string{"message": payloadMassage, "aura.context": payloadAuraContext, "aura.token": "null"}
 	responsebyte := RequestSalesforcePOST(url+foundEndPoint[0], requestMethod, requestProxy, requestHeaders, requestParameter)
-	jsonparser.ArrayEach(responsebyte, func(value []byte, dataType jsonparser.ValueType, offset int, err error) {
-		jsonvalu, _, _, err := jsonparser.Get(value, "returnValue")
-		if err != nil {
-			log.Fatalf("An Error Occured %v", err)
-			gologger.Fatal().Msg("Failed to get ObjectList")
-		}
-		addValu := map[string]string{}
-		json.Unmarshal([]byte(jsonvalu), &addValu)
-		for k, _ := range addValu {
-			arrayObjList = append(arrayObjList, k)
-		}
-	}, "actions")
-	return arrayObjList
+	ss, _, _, _ := jsonparser.Get(responsebyte)
+	return string(ss)
 }
-
 
 func GetObjectItems(ResponseGET []byte, url string, foundEndPoint []string, objectName string, pageSize int, page int, requestProxy string, requestHeaders []string) string {
 	var data string
@@ -71,17 +59,13 @@ func GetObjectItems(ResponseGET []byte, url string, foundEndPoint []string, obje
 
 	responsebyte := RequestSalesforcePOST(url+foundEndPoint[0], requestMethod, requestProxy, requestHeaders, requestParameter)
 	jsonparser.ArrayEach(responsebyte, func(value []byte, dataType jsonparser.ValueType, offset int, err error) {
-		jsonvalu, _, _, err := jsonparser.Get(value, "returnValue", "result")
-		if err != nil {
-			log.Fatalf("An Error Occured %v", err)
-			gologger.Fatal().Msg("Failed to get ObjectItems")
-		}
+		jsonvalu, _, _, _ := jsonparser.Get(value, "returnValue", "result")
+
 		data = string(jsonvalu)
 
 	}, "actions")
 	return data
 }
-
 
 func GetObjectRecord(ResponseGET []byte, url string, foundEndPoint []string, recodeId string, requestProxy string, requestHeaders []string) string {
 	var data string
@@ -114,16 +98,12 @@ func GetWritableObject(ResponseGET []byte, url string, foundEndPoint []string, o
 	responsebyte := RequestSalesforcePOST(url+foundEndPoint[0], requestMethod, requestProxy, requestHeaders, requestParameter)
 	jsonparser.ArrayEach(responsebyte, func(value []byte, dataType jsonparser.ValueType, offset int, err error) {
 		jsonvalu, _, _, err := jsonparser.Get(value, "error")
-		if err != nil {
-			log.Fatalf("An Error Occured %v", err)
-			gologger.Fatal().Msg("Failed to get ObjectWritable")
-		}
+
 		data = string(jsonvalu)
 
 	}, "actions")
 	return data
 }
-
 
 func GetSearchObjectGetSearchObject(ResponseGET []byte, url string, foundEndPoint []string, objectName string, pageSize int, page int, requestProxy string, requestHeaders []string) string {
 	var data string
@@ -145,7 +125,6 @@ func GetSearchObjectGetSearchObject(ResponseGET []byte, url string, foundEndPoin
 	}, "actions")
 	return data
 }
-
 
 //this func get fwuid and markup from (func requestSalesforceGET)
 //then return AuraContext for Generator payload
@@ -173,9 +152,12 @@ func GetAuraContext(response []byte) (string, string, string) {
 		markup := string(regexp.MustCompile(`"(APPLICATION@markup[^"]+)":"([^"]+)"`).FindString(v))
 
 		if fwuid != "" && app != "" && markup != "" {
-			gologger.Warning().Msg("Found UID: " + "[" + fwuid + "]")
-			gologger.Warning().Msg("Found APP Name: " + "[" + app + "]")
-			gologger.Warning().Msg("Found Markup: " + "[" + markup + "]")
+			fmt.Printf("[%s] %s %s\n", aurora.Blue("INFO").String(),
+				aurora.White("UID: ").String(), aurora.Blue("["+fwuid+"]").String())
+			fmt.Printf("[%s] %s %s\n", aurora.Blue("INFO").String(),
+				aurora.White("App Name: ").String(), aurora.Blue("["+app+"]").String())
+			fmt.Printf("[%s] %s %s\n", aurora.Blue("INFO").String(),
+				aurora.White("Markup: ").String(), aurora.Blue("["+markup+"]").String())
 			return fwuid, app, markup
 
 		}
@@ -188,5 +170,3 @@ func GetAuraContext(response []byte) (string, string, string) {
 
 	return fwuid, app, markup
 }
-
-
