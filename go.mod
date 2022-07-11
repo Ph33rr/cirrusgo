@@ -5,7 +5,6 @@ go 1.18
 require (
 	github.com/buger/jsonparser v1.1.1
 	github.com/logrusorgru/aurora v2.0.3+incompatible
-	github.com/ph33rr/CirrusGo v0.0.0-20220711125104-b3d2f454348f
 	github.com/projectdiscovery/gologger v1.1.4
 )
 
