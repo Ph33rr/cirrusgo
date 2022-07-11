@@ -6,8 +6,7 @@ A fast tool to scan SAAS,PAAS vulnerability written in Go
 # SAAS App Support :
 
 [#] salesforce
-
-[!] contentful next version
+[#] contentful (next version)
 
 
 install :
