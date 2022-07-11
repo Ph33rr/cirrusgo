@@ -1,13 +1,15 @@
 package runner
 
 import (
-	"CirrusGo/pkg/errors"
+	
 	"flag"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
 	"strings"
+	
+	"github.com/ph33rr/CirrusGo/pkg/errors"
 )
 
 type Options struct {
