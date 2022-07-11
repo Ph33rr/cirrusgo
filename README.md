@@ -1,5 +1,5 @@
 ## CirrusGo
-A fast tool to scan SAAS,PAAS vulnerability written in Go
+A fast tool to scan SAAS,PAAS App written in Go
 
 SAAS App Support :
 
