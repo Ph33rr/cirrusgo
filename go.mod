@@ -6,7 +6,7 @@ require (
 	github.com/Ph33rr/cirrusgo v0.0.1-beta
 	github.com/buger/jsonparser v1.1.1
 	github.com/logrusorgru/aurora v2.0.3+incompatible
-	github.com/ph33rr/cirrusgo v0.0.1-beta
+	github.com/Ph33rr/cirrusgo v0.0.1-beta
 	github.com/projectdiscovery/gologger v1.1.4
 )
 
