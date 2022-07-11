@@ -1,4 +1,4 @@
-module CirrusGo
+module github.com/Ph33rr/CirrusGo
 
 go 1.18
 
