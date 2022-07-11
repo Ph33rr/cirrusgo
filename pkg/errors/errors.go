@@ -22,5 +22,5 @@ func Exit(err string) {
 
 // Show error message
 func Show(msg string) {
-	gologger.Error().Msg("\n" + msg)
+	gologger.Info().Msg("\n" + msg)
 }
