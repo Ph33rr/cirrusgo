@@ -237,9 +237,7 @@ func SalesforceGetURLFromBody(requestURL string, requestMethod string, requestPr
 	response, err := client.Do(request)
 
 	if err != nil {
-		log.Fatalf("An Error Occured %v", err)
-		gologger.Fatal().Msg("Can't send GET request (fromBody)")
-
+		gologger.Fatal().Msg("Can't GET [AppName,UID,Markup] try manual with flag `cirrusgo salesforce -payload -help`")
 	}
 
 	responseBody, err := ioutil.ReadAll(response.Body)
