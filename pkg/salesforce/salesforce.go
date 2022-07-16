@@ -175,17 +175,34 @@ func RequestSalesforceGET(requestURL string, requestMethod string, requestProxy 
 			}
 		}
 	} else if strings.Contains(checkResponseBody, "window.location.href ='") {
-
 		re := regexp.MustCompile("window.location.href ='([^']+)")
 		getURLFromBody := re.FindString(checkResponseBody)
-		responseHeader := string(getURLFromBody[23:])
-		requestURL := responseHeader
-		responseBody := SalesforceGetURLFromBody(requestURL, requestMethod, requestProxy, requestHeaders, requestParameter)
-		checkResponseBody := string(responseBody)
+		if strings.Contains(getURLFromBody, "http") {
+			responseHeader := string(getURLFromBody[23:])
+			requestURL := responseHeader
+			responseBody := SalesforceGetURLFromBody(requestURL, requestMethod, requestProxy, requestHeaders, requestParameter)
+			checkResponseBody := string(responseBody)
+			if strings.Contains(checkResponseBody, "fwuid") {
+				return responseBody
+			}
+		}
+		if !strings.Contains(getURLFromBody, "http") {
+			responseHeader := string(getURLFromBody[23:])
+			requestURL := requestURL + responseHeader
+			responseBody := SalesforceGetURLFromBody(requestURL, requestMethod, requestProxy, requestHeaders, requestParameter)
+			checkResponseBody := string(responseBody)
+			if strings.Contains(checkResponseBody, "fwuid") {
+				return responseBody
+			} else {
+				responseHeader := SalesforceGetURLFromHeader(requestURL, requestMethod, requestProxy, requestHeaders, requestParameter)
+				requestURL := responseHeader
+				responseBody := SalesforceGetURLFromBody(requestURL, requestMethod, requestProxy, requestHeaders, requestParameter)
+				checkResponseBody := string(responseBody)
+				if strings.Contains(checkResponseBody, "fwuid") {
 
-		if strings.Contains(checkResponseBody, "fwuid") {
-
-			return responseBody
+					return responseBody
+				}
+			}
 		} else {
 			responseHeader := SalesforceGetURLFromHeader(requestURL, requestMethod, requestProxy, requestHeaders, requestParameter)
 			requestURL := responseHeader
@@ -237,8 +254,7 @@ func SalesforceGetURLFromBody(requestURL string, requestMethod string, requestPr
 	response, err := client.Do(request)
 
 	if err != nil {
-		log.Fatalf("An Error Occured %v", err)
-		gologger.Fatal().Msg("Can't send GET request (fromBody)")
+		gologger.Fatal().Msg("Can't GET AppName,UID,Markup try manual with flag `cirrusgo salesforce -payload -help`")
 
 	}
 

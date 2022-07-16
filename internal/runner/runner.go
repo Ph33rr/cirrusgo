@@ -7,8 +7,8 @@ import (
 	"os"
 	"strings"
 
+	"github.com/Ph33rr/cirrusgo/pkg/salesforce"
 	"github.com/logrusorgru/aurora"
-        "github.com/Ph33rr/cirrusgo/pkg/salesforce"
 )
 
 func New(options *Options) {
@@ -63,33 +63,34 @@ func New(options *Options) {
 			}
 		}
 		if o.listobj {
-			foundEndPoint := salesforce.CheckVulnEndpoint(o.Target, o.Proxy, o.Headers)
-			ResponseGET := salesforce.RequestSalesforceGET(o.Target, "GET", o.Proxy, o.Headers, nil)
+			foundEndPoint, target := salesforce.CheckVulnEndpoint(o.Target, o.Proxy, o.Headers)
+			ResponseGET := salesforce.RequestSalesforceGET(target, "GET", o.Proxy, o.Headers, nil)
 			fmt.Printf("[%s] %s %s\n", aurora.Green("INFO").String(),
-				aurora.White("Object List:").String(), aurora.White(salesforce.GetObjectList(ResponseGET, o.Target, foundEndPoint, o.Proxy, o.Headers)))
+				aurora.White("Object List:").String(), aurora.White(salesforce.GetObjectList(ResponseGET, target, foundEndPoint, o.Proxy, o.Headers)))
 		}
 		if o.getobj {
-			foundEndPoint := salesforce.CheckVulnEndpoint(o.Target, o.Proxy, o.Headers)
-			ResponseGET := salesforce.RequestSalesforceGET(o.Target, "GET", o.Proxy, o.Headers, nil)
+			foundEndPoint, target := salesforce.CheckVulnEndpoint(o.Target, o.Proxy, o.Headers)
+			log.Println(target)
+			ResponseGET := salesforce.RequestSalesforceGET(target, "GET", o.Proxy, o.Headers, nil)
 			fmt.Printf("[%s] %s %s %s\n", aurora.Red("Exploit").String(),
 				aurora.White("Object").String(), aurora.White(o.objName+":").String(),
-				aurora.White(salesforce.GetObjectItems(ResponseGET, o.Target, foundEndPoint, o.objName, o.pageSize, o.pageNumber, o.Proxy, o.Headers)))
+				aurora.White(salesforce.GetObjectItems(ResponseGET, target, foundEndPoint, o.objName, o.pageSize, o.pageNumber, o.Proxy, o.Headers)))
 
 		}
 		if o.getrecord {
-			foundEndPoint := salesforce.CheckVulnEndpoint(o.Target, o.Proxy, o.Headers)
-			ResponseGET := salesforce.RequestSalesforceGET(o.Target, "GET", o.Proxy, o.Headers, nil)
+			foundEndPoint, target := salesforce.CheckVulnEndpoint(o.Target, o.Proxy, o.Headers)
+			ResponseGET := salesforce.RequestSalesforceGET(target, "GET", o.Proxy, o.Headers, nil)
 			fmt.Printf("[%s] %s %s %s\n", aurora.Red("Exploit").String(),
 				aurora.White("Object").String(), aurora.White(o.objName+":").String(),
-				aurora.White(salesforce.GetObjectRecord(ResponseGET, o.Target, foundEndPoint, o.recordId, o.Proxy, o.Headers)))
+				aurora.White(salesforce.GetObjectRecord(ResponseGET, target, foundEndPoint, o.recordId, o.Proxy, o.Headers)))
 
 		}
 		if o.full {
-			foundEndPoint := salesforce.CheckVulnEndpoint(o.Target, o.Proxy, o.Headers)
-			ResponseGET := salesforce.RequestSalesforceGET(o.Target, "GET", o.Proxy, o.Headers, nil)
-			objectList := salesforce.GetObjectList(ResponseGET, o.Target, foundEndPoint, o.Proxy, o.Headers)
+			foundEndPoint, target := salesforce.CheckVulnEndpoint(o.Target, o.Proxy, o.Headers)
+			ResponseGET := salesforce.RequestSalesforceGET(target, "GET", o.Proxy, o.Headers, nil)
+			objectList := salesforce.GetObjectList(ResponseGET, target, foundEndPoint, o.Proxy, o.Headers)
 			for _, v := range objectList {
-				response := salesforce.GetObjectItems(ResponseGET, o.Target, foundEndPoint, v, o.pageSize, o.pageNumber, o.Proxy, o.Headers)
+				response := salesforce.GetObjectItems(ResponseGET, target, foundEndPoint, v, o.pageSize, o.pageNumber, o.Proxy, o.Headers)
 				if len(response) <= 2 {
 					fmt.Printf("[%s] %s %s \n", aurora.Green("INFO").String(),
 						aurora.White("Object empty").String(), aurora.White(v+":"))
@@ -101,11 +102,11 @@ func New(options *Options) {
 			}
 		}
 		if o.checkWritableOBJ {
-			foundEndPoint := salesforce.CheckVulnEndpoint(o.Target, o.Proxy, o.Headers)
-			ResponseGET := salesforce.RequestSalesforceGET(o.Target, "GET", o.Proxy, o.Headers, nil)
-			objectList := salesforce.GetObjectList(ResponseGET, o.Target, foundEndPoint, o.Proxy, o.Headers)
+			foundEndPoint, target := salesforce.CheckVulnEndpoint(o.Target, o.Proxy, o.Headers)
+			ResponseGET := salesforce.RequestSalesforceGET(target, "GET", o.Proxy, o.Headers, nil)
+			objectList := salesforce.GetObjectList(ResponseGET, target, foundEndPoint, o.Proxy, o.Headers)
 			for _, v := range objectList {
-				response := salesforce.GetWritableObject(ResponseGET, o.Target, foundEndPoint, v, o.Proxy, o.Headers)
+				response := salesforce.GetWritableObject(ResponseGET, target, foundEndPoint, v, o.Proxy, o.Headers)
 				if strings.Contains(response, "fields") {
 					fmt.Printf("[%s] %s %s \n", aurora.Red("Exploit").String(),
 						aurora.White("Object Writable").String(), aurora.White(v+":"))
@@ -117,10 +118,10 @@ func New(options *Options) {
 
 		}
 		if o.dump {
-			foundEndPoint := salesforce.CheckVulnEndpoint(o.Target, o.Proxy, o.Headers)
-			ResponseGET := salesforce.RequestSalesforceGET(o.Target, "GET", o.Proxy, o.Headers, nil)
+			foundEndPoint, target := salesforce.CheckVulnEndpoint(o.Target, o.Proxy, o.Headers)
+			ResponseGET := salesforce.RequestSalesforceGET(target, "GET", o.Proxy, o.Headers, nil)
 			fmt.Printf("[%s] %s %s\n", aurora.Green("INFO").String(),
-				aurora.White("Dump all INFO:").String(), aurora.White(salesforce.GetDump(ResponseGET, o.Target, foundEndPoint, o.Proxy, o.Headers)))
+				aurora.White("Dump all INFO:").String(), aurora.White(salesforce.GetDump(ResponseGET, target, foundEndPoint, o.Proxy, o.Headers)))
 
 		}
 		if o.help {

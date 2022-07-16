@@ -2,6 +2,8 @@ package salesforce
 
 import (
 	"fmt"
+	"log"
+	"net/url"
 	"strings"
 
 	"github.com/logrusorgru/aurora"
@@ -9,8 +11,9 @@ import (
 	"github.com/projectdiscovery/gologger/levels"
 )
 
-func CheckVulnEndpoint(url string, requestProxy string, requestHeaders []string) []string {
+func CheckVulnEndpoint(urls string, requestProxy string, requestHeaders []string) ([]string, string) {
 	gologger.DefaultLogger.SetMaxLevel(levels.LevelDebug)
+	domainfromURL := urls
 	auraPathEndpoint := [7]string{
 		"",
 		"/", "/aura", "/s/aura", "/s/sfsites/aura", "/sfsites/aura", "/s/fact"}
@@ -21,20 +24,47 @@ func CheckVulnEndpoint(url string, requestProxy string, requestHeaders []string)
 
 	for _, v := range auraPathEndpoint {
 
-		responsebyte := RequestSalesforcePOST(url+v, requestMethod, requestProxy, requestHeaders, requestParameter)
+		responsebyte := RequestSalesforcePOST(urls+v, requestMethod, requestProxy, requestHeaders, requestParameter)
 		responsestr := string(responsebyte)
 		if strings.Contains(responsestr, "aura:invalidSession") {
 			foundEndPoint = append(foundEndPoint, v)
 
 			fmt.Printf("[%s] %s %s\n", aurora.Red("VLN").String(),
-				aurora.White(url+v).String(), aurora.Red("Vulnerable").String())
+				aurora.White(urls+v).String(), aurora.Red("Vulnerable").String())
 
 		}
 
 	}
 	if len(foundEndPoint) == 0 {
-		fmt.Printf("[%s] %s %s\n", aurora.Blue("INFO").String(),
-			aurora.White(url).String(), aurora.Blue("Not Vulnerable").String())
+		urlso, err := url.Parse(domainfromURL)
+		if err != nil {
+			log.Fatal(err)
+		}
+		hostname := strings.TrimPrefix(urlso.Hostname(), "")
+		hostname2 := strings.TrimPrefix(urlso.Scheme, "")
+		urls := hostname2 + "://" + hostname
+		for _, v := range auraPathEndpoint {
+
+			responsebyte := RequestSalesforcePOST(urls+v, requestMethod, requestProxy, requestHeaders, requestParameter)
+			responsestr := string(responsebyte)
+			if strings.Contains(responsestr, "aura:invalidSession") {
+				foundEndPoint = append(foundEndPoint, v)
+
+				fmt.Printf("[%s] %s %s\n", aurora.Red("VLN").String(),
+					aurora.White(urls+v).String(), aurora.Red("Vulnerable").String())
+
+			}
+		}
+		if len(foundEndPoint) == 0 {
+			fmt.Printf("[%s] %s %s\n", aurora.Blue("INFO").String(),
+				aurora.White(urls).String(), aurora.Blue("Not Vulnerable").String())
+		} else {
+			v := strings.Join(foundEndPoint, ",")
+			fmt.Printf("[%s] %s\n", aurora.Red("vulnerable Endpoint").String(),
+				aurora.White("["+v+"]").String())
+			return foundEndPoint, urls
+		}
+
 	} else {
 
 		v := strings.Join(foundEndPoint, ",")
@@ -43,5 +73,5 @@ func CheckVulnEndpoint(url string, requestProxy string, requestHeaders []string)
 
 	}
 
-	return foundEndPoint
+	return foundEndPoint, urls
 }
