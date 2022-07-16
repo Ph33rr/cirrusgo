@@ -189,7 +189,6 @@ func RequestSalesforceGET(requestURL string, requestMethod string, requestProxy 
 		if !strings.Contains(getURLFromBody, "http") {
 			responseHeader := string(getURLFromBody[23:])
 			requestURL := requestURL + responseHeader
-			log.Println("urlpath" + requestURL)
 			responseBody := SalesforceGetURLFromBody(requestURL, requestMethod, requestProxy, requestHeaders, requestParameter)
 			checkResponseBody := string(responseBody)
 			if strings.Contains(checkResponseBody, "fwuid") {
