@@ -4,7 +4,8 @@ A fast tool to scan SAAS,PAAS App written in Go
 SAAS App Support :
 
 - salesforce
-- contentful (next version)
+- contentful
+- googledocs
 
 **Note flag -o output not working**
 
