@@ -4,8 +4,23 @@ A fast tool to scan SAAS,PAAS App written in Go
 SAAS App Support :
 
 - salesforce
+
+  Vuln Support :[ Check Read object , Check Writable Object, Check registration enabled ]
+
 - contentful
+
+  Vuln Support :[ Check Graphql API]
+
+
 - googledocs
+
+  Vuln Support :[ Check view analytics ]
+  
+- googledrive
+
+   Vuln Support :[ SSRF ]
+
+
 
 **Note flag -o output not working**
 
@@ -40,6 +55,17 @@ cirrusgo --help
 -h, --help                Display its help
 
 [cirrusgo [app] [options] ..]
+
+
+```
+
+**Example :**
+
+```console
+cirrusgo salesforce --help
+```
+
+```console
 cirrusgo salesforce --help
 
 -u, --url <URL>           Define single URL
@@ -81,6 +107,7 @@ Dump                     no options
 -h, --help               Display its help 
 
 ```
+
 
 **Example :**
 
