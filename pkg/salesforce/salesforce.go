@@ -133,13 +133,11 @@ func RequestSalesforceGET(requestURL string, requestMethod string, requestProxy 
 	//bytes.Equal(responseBody, emptyByteVar)
 	// not working for all website
 	//emptyByteVar := make([]byte, 128)
-
 	if strings.Contains(checkResponseBody, "fwuid") {
 		return responseBody
 
 	} else if len(checkResponseBody) == 0 {
 		// get url from Location header
-
 		responseHeader := response.Header.Get("Location")
 		requestURL := responseHeader
 		responseBody := SalesforceGetURLFromBody(requestURL, requestMethod, requestProxy, requestHeaders, requestParameter)
@@ -149,7 +147,17 @@ func RequestSalesforceGET(requestURL string, requestMethod string, requestProxy 
 			return responseBody
 		} else {
 			checkResponseBody := string(responseBody)
-			if strings.Contains(checkResponseBody, "window.location.href ='") {
+			if len(checkResponseBody) == 0 {
+				// get url from Location header
+				responseHeader := SalesforceGetURLFromHeader(requestURL, requestMethod, requestProxy, requestHeaders, requestParameter)
+				requestURL := responseHeader
+				responseBody := SalesforceGetURLFromBody(requestURL, requestMethod, requestProxy, requestHeaders, requestParameter)
+				checkResponseBody := string(responseBody)
+				if strings.Contains(checkResponseBody, "fwuid") {
+					return responseBody
+				}
+
+			} else if strings.Contains(checkResponseBody, "window.location.href ='") {
 
 				re := regexp.MustCompile("window.location.href ='([^']+)")
 				getURLFromBody := re.FindString(checkResponseBody)
@@ -158,11 +166,9 @@ func RequestSalesforceGET(requestURL string, requestMethod string, requestProxy 
 				responseBody := SalesforceGetURLFromBody(requestURL, requestMethod, requestProxy, requestHeaders, requestParameter)
 
 				if strings.Contains(checkResponseBody, "fwuid") {
-
 					return responseBody
 
 				} else {
-
 					responseHeader := SalesforceGetURLFromHeader(requestURL, requestMethod, requestProxy, requestHeaders, requestParameter)
 					requestURL := responseHeader
 					responseBody := SalesforceGetURLFromBody(requestURL, requestMethod, requestProxy, requestHeaders, requestParameter)
@@ -175,6 +181,7 @@ func RequestSalesforceGET(requestURL string, requestMethod string, requestProxy 
 			}
 		}
 	} else if strings.Contains(checkResponseBody, "window.location.href ='") {
+
 		re := regexp.MustCompile("window.location.href ='([^']+)")
 		getURLFromBody := re.FindString(checkResponseBody)
 		if strings.Contains(getURLFromBody, "http") {
@@ -204,6 +211,7 @@ func RequestSalesforceGET(requestURL string, requestMethod string, requestProxy 
 				}
 			}
 		} else {
+
 			responseHeader := SalesforceGetURLFromHeader(requestURL, requestMethod, requestProxy, requestHeaders, requestParameter)
 			requestURL := responseHeader
 			responseBody := SalesforceGetURLFromBody(requestURL, requestMethod, requestProxy, requestHeaders, requestParameter)
