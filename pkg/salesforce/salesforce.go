@@ -155,6 +155,14 @@ func RequestSalesforceGET(requestURL string, requestMethod string, requestProxy 
 				checkResponseBody := string(responseBody)
 				if strings.Contains(checkResponseBody, "fwuid") {
 					return responseBody
+				} else {
+					responseHeader := SalesforceGetURLFromHeader(requestURL, requestMethod, requestProxy, requestHeaders, requestParameter)
+					requestURL := responseHeader
+					responseBody := SalesforceGetURLFromBody(requestURL, requestMethod, requestProxy, requestHeaders, requestParameter)
+					checkResponseBody := string(responseBody)
+					if strings.Contains(checkResponseBody, "fwuid") {
+						return responseBody
+					}
 				}
 
 			} else if strings.Contains(checkResponseBody, "window.location.href ='") {
@@ -226,6 +234,7 @@ func RequestSalesforceGET(requestURL string, requestMethod string, requestProxy 
 	defer request.Body.Close()
 	return responseBody
 }
+
 
 //return request
 func SalesforceGetURLFromBody(requestURL string, requestMethod string, requestProxy string, requestHeaders []string, requestParameter map[string]string) []byte {
