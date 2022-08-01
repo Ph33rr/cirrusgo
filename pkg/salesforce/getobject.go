@@ -139,8 +139,7 @@ func GetAuraContext(response []byte) (string, string, string) {
 
 		tempJS, err := url.QueryUnescape(s)
 		if err != nil {
-			log.Fatalf("An Error Occured %v", err)
-			gologger.Fatal().Msg("Failed to get AuraContext")
+			gologger.Fatal().Msg("Can't GET AppName,UID,Markup try manual with flag `cirrusgo salesforce -payload -help`")
 		}
 		temparrayJS = append(temparrayJS, tempJS)
 
